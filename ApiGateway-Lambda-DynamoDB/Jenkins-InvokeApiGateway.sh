@@ -1,16 +1,10 @@
-##### This Shell script is meant to be executed with Jenkins job with build parameters
-##### [id, name, occupation, SelecttheOperation and apigatewayurl]
-##### Usage of the script is demonstrated in below youtube video
-##### YouTube URL:
-#####
-
-echo $apigatewayurl
-echo $SelecttheOperation
+echo $urlapigw
+echo $Operacion
 
 case $SelecttheOperation in
 	create)
     echo 'Create Operation Executed'
-    payloadstring='"id":"'$id'", "name":"'$name'", "occupation":"'$occupation'"'
+    payloadstring='"rut":"'$id'", "nombre":"'$name'", "apellido":"'$occupation'"'
     curl -X POST -d "{\"operation\":\"$SelecttheOperation\",\"tableName\":\"apilambdadb\",\"payload\":{\"Item\":{ $payloadstring }}}" $apigatewayurl
     ;;
 	read)
