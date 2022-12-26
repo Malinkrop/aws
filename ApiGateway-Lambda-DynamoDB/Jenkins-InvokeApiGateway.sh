@@ -1,29 +1,29 @@
 echo $urlapigw
 echo $Operacion
 
-case $SelecttheOperation in
+case $Operacion in
 	create)
     echo 'Create Operation Executed'
-    payloadstring='"rut":"'$id'", "nombre":"'$name'", "apellido":"'$occupation'"'
-    curl -X POST -d "{\"operation\":\"$SelecttheOperation\",\"tableName\":\"apilambdadb\",\"payload\":{\"Item\":{ $payloadstring }}}" $apigatewayurl
+    payloadstring='"rut":"'$id'", "nombre":"'$name'", "apellido":"'$apellido'"'
+    curl -X POST -d "{\"operation\":\"$Operacion\",\"tableName\":\"apilambdadb\",\"payload\":{\"Item\":{ $payloadstring }}}" $urlapigw
     ;;
 	read)
 		echo 'Read Operation Executed'
     payloadstring='"id":"'$id'"'
-		curl -X POST -d "{\"operation\":\"$SelecttheOperation\",\"tableName\":\"apilambdadb\",\"payload\":{\"Key\":{ $payloadstring }}}" $apigatewayurl
+		curl -X POST -d "{\"operation\":\"$Operacion\",\"tableName\":\"apilambdadb\",\"payload\":{\"Key\":{ $payloadstring }}}" $urlapigw
 		;;
 	list)
     echo 'List Operation Executed'
-    curl -X POST -d "{\"operation\":\"$SelecttheOperation\",\"tableName\":\"apilambdadb\",\"payload\":{\"Item\":{\"id\":\"2\"}}}" $apigatewayurl
+    curl -X POST -d "{\"operation\":\"$Operacion\",\"tableName\":\"apilambdadb\",\"payload\":{\"Item\":{\"id\":\"2\"}}}" $urlapigw
 		;;
   delete)
 		echo 'Delete Operation Executed'
     payloadstring='"id":"'$id'"'
-		curl -X POST -d "{\"operation\":\"$SelecttheOperation\",\"tableName\":\"apilambdadb\",\"payload\":{\"Key\":{ $payloadstring }}}" $apigatewayurl
+		curl -X POST -d "{\"operation\":\"$Operacion\",\"tableName\":\"apilambdadb\",\"payload\":{\"Key\":{ $payloadstring }}}" $urlapigw
 		;;
 	update)
-		echo $SelecttheOperation 'Operation Executed'
+		echo $Operacion 'Operation Executed'
     payloadstring='"id":"'$id'"'
-  	curl -X POST -d "{\"operation\":\"$SelecttheOperation\",\"tableName\":\"apilambdadb\",\"payload\":{\"Key\":{ $payloadstring }, \"UpdateExpression\": \"set occupation=:o\", \"ExpressionAttributeValues\":{ \":o\": \"$occupation\"}}}" $apigatewayurl
+  	curl -X POST -d "{\"operation\":\"$Operacion\",\"tableName\":\"apilambdadb\",\"payload\":{\"Key\":{ $payloadstring }, \"UpdateExpression\": \"set occupation=:o\", \"ExpressionAttributeValues\":{ \":o\": \"$apellido\"}}}" $urlapigw
   	;;
 esac
